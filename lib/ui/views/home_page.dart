@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:graph/controller/input_form_controller.dart';
 import 'package:graph/ui/widgets/buttons/add_key_button.dart';
 import 'package:graph/ui/widgets/graph_view.dart';
 import 'package:graph/ui/widgets/dialogs/input_dialog.dart';
@@ -59,8 +61,21 @@ class MyHomePage extends StatelessWidget {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.black,
+      floatingActionButton: CustomFAB(),
+    );
+  }
+}
+
+class CustomFAB extends ConsumerWidget {
+  const CustomFAB({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final apiKey = ref.watch(inputControllerProvider).apiKey;
+
+    if (apiKey != '') {
+      return FloatingActionButton(
+        backgroundColor: Colors.black, 
         child: const Icon(Icons.add),
         onPressed: () {
           showDialog(
@@ -70,7 +85,8 @@ class MyHomePage extends StatelessWidget {
             },
           );
         },
-      ),
-    );
+      );
+    } 
+    return Container();
   }
 }

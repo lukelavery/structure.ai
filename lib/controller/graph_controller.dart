@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:graph/services/openai_service.dart';
+import 'package:graph/utils/exceptions/custom_exception.dart';
 import 'package:graphite/core/typings.dart';
 
 final graphControllerProvider = StateNotifierProvider.autoDispose<
@@ -17,13 +18,26 @@ class GraphController extends StateNotifier<AsyncValue<List<NodeInput>>> {
   Future<void> generateResponse(
       {required String prompt, required String apiKey}) async {
     state = const AsyncValue.loading();
-    final response = await _ref
-        .read(openAiServiceProvider)
-        .generateCompletion(prompt: prompt, apiKey: apiKey);
-    _updateGraph(response);
+    try {
+      final response = await _ref
+          .read(openAiServiceProvider)
+          .generateCompletion(prompt: prompt, apiKey: apiKey);
+      if (response != null) {
+        _setGraph(response);
+      }
+      print("Response: $response");
+    } on CustomException catch (error, stackTrace) {
+      state = AsyncValue.error(error, stackTrace);
+    }
   }
 
-  void _updateGraph(String response) {
-    state = AsyncValue.data(nodeInputFromJson(response));
+  void _setGraph(String response) {
+    try {
+      final nodes = nodeInputFromJson(response);
+      state = AsyncValue.data(nodeInputFromJson(response));
+    } catch (e) {
+      state = AsyncValue.error(
+          CustomException(message: e.toString()), StackTrace.current);
+    }
   }
 }

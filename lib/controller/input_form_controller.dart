@@ -10,6 +10,11 @@ class InputController extends StateNotifier<InputModel> {
   InputController(this._ref) : super(const InputModel(apiKey: '', input: ''));
 
   final Ref _ref;
+  InputModel previousState = const InputModel(apiKey: '', input: '');
+
+  onEdit() {
+    previousState = state;
+  }
 
   void onChangedApiKey(String apiKey) {
     state = InputModel(apiKey: apiKey, input: state.input);
@@ -19,12 +24,10 @@ class InputController extends StateNotifier<InputModel> {
     state = InputModel(apiKey: state.apiKey, input: input);
   }
 
-  // Future<void> onSubmit() async {
-  //   final response = await _ref
-  //       .read(openAiServiceProvider)
-  //       .generateCompletion(prompt: state.input, apiKey: state.apiKey);
-  //   _ref.read(graphControllerProvider.notifier).input(response);
-  // }
+  void onCancelApiKey() {
+    state = previousState;
+  }
+
   void onSubmit() {
     _ref
         .read(graphControllerProvider.notifier)

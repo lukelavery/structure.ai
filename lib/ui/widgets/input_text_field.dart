@@ -26,7 +26,12 @@ class InputTextField extends StatelessWidget {
         maxLength: maxLength,
         initialValue: initialValue,
         onChanged: onChanged,
-        decoration: InputDecoration(hintText: hintText),
+        decoration: InputDecoration(
+          border: const OutlineInputBorder(),
+          filled: true,
+          fillColor: Colors.white,
+          hintText: hintText,
+        ),
         minLines: minLines,
         maxLines: maxLines,
       ),

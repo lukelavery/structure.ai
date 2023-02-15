@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:graph/controller/input_form_controller.dart';
 import 'package:graph/ui/widgets/input_text_field.dart';
 
@@ -9,10 +10,15 @@ class InputDialog extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final inputStateNotifier = ref.read(inputControllerProvider.notifier);
-    final inputState = ref.read(inputControllerProvider);
+    final inputState = ref.watch(inputControllerProvider);
 
     return AlertDialog(
-      title: const Text("Input"),
+      // icon: Image.asset('assets/images/openai-icon.png', height: 50,),
+      icon: SvgPicture.asset(
+        'assets/images/openai.svg',
+        height: 50,
+      ),
+      title: const Text("Add a prompt"),
       content: SingleChildScrollView(
         child: Column(
           children: [
@@ -21,8 +27,7 @@ class InputDialog extends ConsumerWidget {
               initialValue: inputState.input,
               hintText: 'Prompt',
               onChanged: inputStateNotifier.onChangedInput,
-              // minLines: 2,
-              maxLines: null,
+              minLines: 5,
             ),
           ],
         ),
@@ -31,16 +36,22 @@ class InputDialog extends ConsumerWidget {
         TextButton(
           child: const Text("Cancel"),
           onPressed: () {
+            inputStateNotifier.onCancelApiKey();
             Navigator.of(context).pop();
           },
         ),
-        TextButton(
-          onPressed: () {
-            inputStateNotifier.onSubmit();
-            Navigator.pop(context);
-          },
-          child: const Text('Submit'),
-        )
+        inputState.input == ''
+            ? const TextButton(
+                onPressed: null,
+                child: Text('Submit'),
+              )
+            : TextButton(
+                onPressed: () async {
+                  inputStateNotifier.onSubmit();
+                  Navigator.pop(context);
+                },
+                child: const Text('Submit'),
+              ),
       ],
     );
   }
