@@ -23,7 +23,7 @@ class InputDialog extends ConsumerWidget {
         child: Column(
           children: [
             InputTextField(
-              maxLength: 280,
+              maxLength: 500,
               initialValue: inputState.input,
               hintText: 'Prompt',
               onChanged: inputStateNotifier.onChangedInput,
