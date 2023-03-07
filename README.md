@@ -1,16 +1,12 @@
-# graph
+# structure.ai
 
-A new Flutter project.
+## Description
+* Structure.ai is a web application that automates the creation of flowcharts from unstructured legal text using natural language processing (NLP) technology.
+The software uses ChatGPT's API to extract legal relationships from text and generate flowcharts, eliminating the need for manual input and significantly reducing the time and effort required to accurately map out complex legal relationships.
+* Legal professionals can simply upload legal documents or input text, and the software will generate a flowchart that visualizes the relationships between entities.
+* With a proof-of-concept already developed using the Flutter framework, this application demonstrates the potential to save valuable time in legal work by automating the creation of flowcharts and reducing the likelihood of errors that can result from manual flowchart creation.
+* While the current implementation is limited to short prompts, further development will expand the capabilities of this application to handle longer documents and more complex legal structures.
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## How to use
+* View the demo here: https://lukelavery.github.io/structure.ai-demo/
+* Simply add your OpenAI key and input a natural language prompt.
