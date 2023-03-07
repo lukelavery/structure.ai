@@ -54,7 +54,7 @@ class MyHomePage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(30),
                 ),
                 height: 800,
-                width: 1000,
+                width: 1250,
                 child: const GraphView(),
               ),
             ),

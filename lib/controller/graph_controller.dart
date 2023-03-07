@@ -15,7 +15,7 @@ class GraphController extends StateNotifier<AsyncValue<List<NodeInput>>> {
   }
 
   final Ref _ref;
-  final List<NodeInput> nodes = nodeInputFromJson('[{"id":"Alphabet Inc.","next":[{"outcome":"Google LLC"},{"outcome":"XXVI Holdings Inc."},{"outcome":"Google Ireland Holdings"},{"outcome":"Alphabet Capital US LLC"}]},{"id":"Google LLC","next":[]},{"id":"XXVI Holdings Inc.","next":[{"outcome":"Alphabet Holding LLC"}]},{"id":"Google Ireland Holdings","next":[]},{"id":"Alphabet Capital US LLC","next":[]},{"id":"Alphabet Holding LLC","next":[{"outcome":"CapitalG"},{"outcome":"GV"}]},{"id":"CapitalG","next":[]},{"id":"GV","next":[]}]');
+  final List<NodeInput> nodes = [];
 
   Future<void> generateResponse(
       {required String prompt, required String apiKey}) async {
@@ -23,7 +23,7 @@ class GraphController extends StateNotifier<AsyncValue<List<NodeInput>>> {
     try {
       final response = await _ref
           .read(openAiServiceProvider)
-          .generateCompletion(prompt: prompt, apiKey: apiKey);
+          .generateChatCompletion(prompt: prompt, apiKey: apiKey);
       if (response != null) {
         _setGraph(response);
       }

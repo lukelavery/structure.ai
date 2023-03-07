@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:graph/controller/graph_controller.dart';
 import 'package:graph/controller/input_form_controller.dart';
-import 'package:graph/services/openai_service.dart';
 import 'package:graph/utils/exceptions/custom_exception.dart';
 import 'package:graphite/graphite.dart';
 
@@ -19,9 +18,40 @@ class GraphView extends ConsumerWidget {
         if (data.isNotEmpty) {
           return DirectGraph(
             list: data,
-            defaultCellSize: const Size(100.0, 100.0),
-            cellPadding: const EdgeInsets.all(20),
+            defaultCellSize: const Size(104.0, 104.0),
+            cellPadding: const EdgeInsets.all(14),
+            contactEdgesDistance: 5.0,
             orientation: MatrixOrientation.Vertical,
+            // pathBuilder: customEdgePathBuilder,
+            centered: false,
+            nodeBuilder: (ctx, node) {
+              return Card(
+                color: Colors.lightBlue.shade100,
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      node.id,
+                      style: const TextStyle(
+                              fontSize: 15.0,
+                              fontWeight: FontWeight.bold,
+                              // color: Colors.red,
+                            ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+              );
+            },
+            paintBuilder: (edge) {
+              var p = Paint()
+                ..color = Colors.blueGrey
+                ..style = PaintingStyle.stroke
+                ..strokeCap = StrokeCap.round
+                ..strokeJoin = StrokeJoin.round
+                ..strokeWidth = 2;
+              return p;
+            },
           );
         } else {
           return Center(
