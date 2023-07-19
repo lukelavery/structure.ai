@@ -20,6 +20,7 @@
 
 1. Add your OpenAI API key.
 2. Input any text describing a company structure.
+3. Submit.
 
 ## Examples
 
