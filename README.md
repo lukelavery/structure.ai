@@ -1,4 +1,16 @@
-# structure.ai
+<h1 align="center">
+  <br>
+  <img src="https://github.com/lukelavery/structure.ai/blob/main/assets/images/logo.png" alt="structure.ai" width="200">
+  <br>
+  structure.ai
+  <br>
+</h1>
+
+<div align="center">
+  <h4>A web app that creates diagrams from unstructured legal text.</h4>
+  <a href="https://lukelavery.github.io/structure.ai-demo/"><h4>View Demo</h4></a>
+</div>
+
 
 ## Description
 * Structure.ai is a web application that automates the creation of flowcharts from unstructured legal text using natural language processing (NLP) technology.
