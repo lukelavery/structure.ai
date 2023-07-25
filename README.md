@@ -7,7 +7,7 @@
 </h1>
 
 <div align="center">
-  <h4>A web app that creates diagrams from unstructured legal text.</h4>
+  <h4>A GPT web app that creates diagrams from unstructured legal text.</h4>
   <a href="https://lukelavery.github.io/structure.ai-demo" >View Demo</a>
 </div>
 
